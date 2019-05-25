@@ -24,7 +24,7 @@ collection.create_index([("coordinate", GEO2D)])
 def post_issue():
     content = request.get_json()
     content["create_date"] = datetime.datetime.now().strftime("%d/%m/%Y")
-    content["user_likes"] = []
+    content["users_like"] = []
     post_id = collection.insert_one(content).inserted_id
     return str(post_id)
 
