@@ -9,7 +9,7 @@
   {% for document in documents %}
   <p>{{document.author}} says: <b>{{document.text}}</b>
     {% for image in document.images %}
-    <p>image: {{image}}</p>
+    <p><img src="/images/{{image}}"></p>
     {% endfor %}
   </p>
   {% endfor %} 
