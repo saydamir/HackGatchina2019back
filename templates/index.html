@@ -1,0 +1,16 @@
+<!doctype html>
+<title>Flaskr</title>
+<nav>
+  <h1>Flaskr</h1>
+</nav>
+<section class="content">
+  <header>
+  </header>
+  {% for document in documents %}
+  <p>{{document.author}} says: <b>{{document.text}}</b>
+    {% for image in document.images %}
+    <p>image: {{image}}</p>
+    {% endfor %}
+  </p>
+  {% endfor %} 
+</section>
