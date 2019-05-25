@@ -5,6 +5,14 @@ body {
   font-weight: 300;
 }
 
+a {
+  color: #613EEA;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .container {
   max-width: 980px;
   margin: 0 auto;
@@ -29,6 +37,14 @@ h1 {
 .head__logo {
   font-size: 20pt;
   font-weight: bold;
+}
+
+.head__logo a {
+  text-decoration: none;
+}
+
+.nav_back {
+  font-size: 10pt;
 }
 
 .card {
@@ -161,5 +177,6 @@ h1 {
 .page__counter {
   text-align: right;
   color: #10C971;
-  font-size: 24pt;
+  font-size: 32pt;
+  margin-top:24px;
 }
