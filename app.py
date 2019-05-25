@@ -29,6 +29,8 @@ def post_issue():
     content["create_date"] = datetime.datetime.now().strftime("%d/%m/%Y")
     content["users_like"] = []
     post_id = collection.insert_one(content).inserted_id
+    collection.update_one({'_id': ObjectId(str(post_id))},
+                                {'$set': {"id": str(post_id)}},upsert=True)    
     return str(post_id)
 
 @app.route('/issues', methods=['GET'])
