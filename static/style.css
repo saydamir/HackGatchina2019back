@@ -49,10 +49,46 @@ h1 {
   color: #10C971;
 }
 
+.card__bottom {
+  color: #A0A4B0;
+  font-size: 12pt;
+  margin-top:12px;
+}
+
+.card__geo {
+  flex: content;
+  align-items: center;
+}
+
+.card__geo a, .card__geo a:visited {
+  color: #613EEA;
+  font-size: 12pt;
+  font-weight: 300;
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.card__geo a:hover {
+  color: #613EEA;
+  text-decoration: underline;
+}
+
+
+
+/* ICONS */
+
 .icon__like {
   background: url(icons/thumb-up-line.svg) no-repeat;
-  display: inline-block;
+  display: inline-flex;
   width: 20px;
   height: 20px;
   fill: #10C971;
+}
+
+.icon__geo {
+  background: url(icons/map-pin-line.svg) no-repeat;
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
 }
