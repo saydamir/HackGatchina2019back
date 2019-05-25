@@ -6,31 +6,6 @@
   <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
-
-  <!-- tiny slider start -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css">
-  <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.helper.ie8.js"></script><![endif]-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.js"></script>
-  <script type="module">
-    import {tns} from '/static/node_modules/tiny-slider/src/tiny-slider.js';
-  
-    var slider = tns({
-      container: '.my-slider',
-      items: 3,
-      slideBy: 'page',
-      autoplay: true
-    });
-  </script>
-  <script>
-    const Http = new XMLHttpRequest();
-    const url='https://jsonplaceholder.typicode.com/posts';
-    Http.open("GET", url);
-    Http.send();
-    Http.onreadystatechange=(e)=>{
-    console.log(Http.responseText)
-    }
-  </script>
-  <!-- tiny slider end -->
 </head>
 <body>
   <nav class="head">
@@ -96,378 +71,25 @@
                     function initMap() {
                         var mapDiv = document.getElementById('map-container');
                         map = new google.maps.Map(mapDiv, {
-                            zoom: 8,
+                            zoom: 11,
                             scrollwheel: false,
-                            center: new google.maps.LatLng(43.23511860000001, 76.88966089999997), // ТУТ УКАЗЫВАЕМ ТОЧКУ КОТОРАЯ БУДЕТ ЦЕНТРОМ КАРТЫ НА СТРАНИЦЕ
-                      styles: [{stylers:[{hue:'#eee'},{saturation:0}]},{
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "color": "#e9e9e9"
-                            },
-                            {
-                                "lightness": 17
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative.country",
-                        "elementType": "labels.text",
-                        "stylers": [
-                            {
-                                "lightness": "29"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative.province",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                            {
-                                "lightness": "-12"
-                            },
-                            {
-                                "color": "#796340"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative.locality",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                            {
-                                "lightness": "15"
-                            },
-                            {
-                                "saturation": "15"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "color": "#fbf5ed"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape.natural",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "color": "#fbf5ed"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.attraction",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "lightness": "30"
-                            },
-                            {
-                                "saturation": "-41"
-                            },
-                            {
-                                "gamma": "0.84"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.attraction",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.business",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.business",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.medical",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "color": "#fbd3da"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.medical",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "color": "#b0e9ac"
-                            },
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                            {
-                                "hue": "#68ff00"
-                            },
-                            {
-                                "lightness": "-24"
-                            },
-                            {
-                                "gamma": "1.59"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.sports_complex",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.sports_complex",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "saturation": "10"
-                            },
-                            {
-                                "color": "#c3eb9a"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "lightness": "30"
-                            },
-                            {
-                                "color": "#e7ded6"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "saturation": "-39"
-                            },
-                            {
-                                "lightness": "28"
-                            },
-                            {
-                                "gamma": "0.86"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#ffe523"
-                            },
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "saturation": "0"
-                            },
-                            {
-                                "gamma": "1.44"
-                            },
-                            {
-                                "color": "#fbc28b"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "saturation": "-40"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "color": "#fed7a5"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "gamma": "1.54"
-                            },
-                            {
-                                "color": "#fbe38b"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#ffffff"
-                            },
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "gamma": "2.62"
-                            },
-                            {
-                                "lightness": "10"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "weight": "0.50"
-                            },
-                            {
-                                "gamma": "1.04"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit.station.airport",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#dee3fb"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "saturation": "46"
-                            },
-                            {
-                                "color": "#a4e1ff"
-                            }
-                        ]
-                    }
-                        ]
-                    });
-                         /* НИЖЕ СПИСОК ТОЧЕК, СТРОКИ МОЖНО УДАЛЯТЬ ИЛИ ДУБЛИРОВАТЬ, ЗАПОЛНЯЮТСЯ ПО ИНФОРМАЦИИ ИЗ АДМИНКИ */
+                            center: new google.maps.LatLng(41.6202005,-83.6044291), // Toledo center
+                      styles: [{stylers:[{hue:'#3655A5'},{saturation:250}]},{featureType:'road',elementType:'geometry',stylers:[{lightness:50},{visibility:'simplified'}]},{featureType:'road',elementType:'labels',stylers:[{visibility:'off'}]}]
+                        });
                         var outlets = [
-                           {lat: 43.23511860000001, lng: 76.88966089999997, name: 'Chechil Pub на Розыбакиева', address: 'г. Алма-Ата, ул. Розыбакиева 77/85', phone: '+77273753899,+77473753899'},
-                           {lat: 43.2647493, lng: 76.94758609999997, name: 'Chechil Pub на Тулебаева', address: 'г. Алма-Ата, ул. Тулебаева 38/61', phone: '+77272737445,+77072737447'},
-                           {lat: 43.2221708, lng: 76.87291019999998, name: 'Chechil Pub 4 МКР', address: 'г. Алма-Ата, 4мкр. дом 24б', phone: '+77272770133,+77472770133'},
-                           {lat: 43.205928, lng: 76.903277, name: 'Chechil Pub на Жарокова', address: 'г. Алма-Ата, мкр. Алмагуль, 18а', phone: '+77273964098,+77773964099'},
-                           {lat: 43.2511391, lng: 76.88636109999993, name: 'Chechil Pub на Толе би', address: 'г. Алма-Ата, ул. Толе би, 187', phone: '+77273954847,+77073954841'}
+                            {lat: 41.67669637889278, lng: -83.68196048465575, name: 'Sylvania', address: '5860 W CENTRAL AVE, TOLEDO OH 43615', workingHours: '11AM – 9PM', phone: '(419)57-87-777'},
+                            {lat: 41.57846782296604, lng: -83.6812830888855, name: 'Maumee', address: '514 THE BOULEVARD, MAUMEE OH 43537', workingHours: '11AM – 9PM', phone: '(419)89-39-999'},
+                            {lat: 41.5372466, lng: -83.63445769999998, name: 'Perrysburg', address: '26520 N DIXIE HWY, PERRYSBURG OH 43551', workingHours: '11AM – 9PM', phone: '(419)87-47-777'}, 
+                            {lat: 41.65377609999999, lng: -83.62144380000001, name: 'Bubble Tea', address: '1440 SECOR ROAD SUITE P, TOLEDO OH 43607', workingHours: '12AM – 10PM'}
                         ];
-                        var image = 'link';  // ССЫЛКА НА КАРТИНКУ ДЛЯ МАРКЕРА
+                        var image = 'http://image.ibb.co/bFXp4m/Marker.png';
                         var infowindow = new google.maps.InfoWindow({
                           content: ''
                         });
                         var template = '<div class="tooltip">' +
                           '<div class="tooltip_h1">{name}</div>' +
                           '<div class="tooltip_address">{address}</div>' +
-                          '<div class="tooltip_hours">OPEN EVERY DAY' + // ФРАЗА О ВРЕМЕНИ РАБОТЫ (КАЖДЫЙ ДЕНЬ, ИЛИ «ПО БУДНЯМ» И Т.Д.)
+                          '<div class="tooltip_hours">OPEN EVERY DAY' +
                             '<br>{workingHours}</div>' +
                           '<div class="tooltip_phones">{phone}</div>' +
                         '</div>';
@@ -479,7 +101,6 @@
                               var value = outlets[i][item] !== void 0 ? outlets[i][item] : '';
                               layout = layout.replace('{' + item + '}', value);
                             });
-                            var icon  = '<div class="marker">'
                             var marker = new google.maps.Marker({
                                 position: {
                                     lat: outlets[i].lat,
@@ -487,17 +108,11 @@
                                 },
                                 map: innerMap,
                                 icon:  {
-                                    path: "M28,0A28,28,0,0,0,0,28C0,49.75,28,75,28,75S56,49.25,56,28A28,28,0,0,0,28,0Zm0,39.25a11,11,0,1,1,11-11A11,11,0,0,1,28,39.25Z",
-                        fillColor: '#ffcb08', // ЦВЕТ МАРКЕРА 
-                        fillOpacity: .9,
-                        anchor: new google.maps.Point(12,-290),
-                        strokeWeight: 0,
-                        scale: .90,
-                                    size: new google.maps.Size(56,75),  // РАЗМЕР МАРКЕРА
-                                    scaledSize: new google.maps.Size(56,75),  // РАЗМЕР МАРКЕРА
-                                    anchor: new google.maps.Point(28,75)  // СДВИГ ОТНОСИТЕЛЬНО ГЕО ТОЧКИ (СЮДА ПИШЕТСЯ ВЫСОТАхШИРИНА/2)
+                                    url: image,
+                                    size: new google.maps.Size(56,75),
+                                    scaledSize: new google.maps.Size(56,75),
+                                    anchor: new google.maps.Point(28,75)
                                 },
-                                animation: google.maps.Animation.DROP ,
                                 infoWindowContent: layout
                             });
                             google.maps.event.addListener(marker, 'click', function() {
