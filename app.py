@@ -2,13 +2,13 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 import datetime
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template, Response
+from flask import Flask, request, redirect, url_for, render_template, Response
 from werkzeug.utils import secure_filename
 import hashlib
 import json
 
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 
@@ -47,16 +47,15 @@ def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
             return redirect(request.url)
         file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = hashlib.md5(file.read()).hexdigest() + "." + secure_filename(file.filename).rsplit('.', 1)[1].lower()
+            filename =  hashlib.md5(file.read()).hexdigest() + "." + secure_filename(file.filename).rsplit('.', 1)[1].lower()
+            file.seek(0)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return filename
     return '''
