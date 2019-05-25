@@ -1,0 +1,58 @@
+body {
+  background: #F9FAFB;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14pt;
+  font-weight: 300;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.head {
+  background: #fff;
+  padding: 12px 0;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  z-index: 999;
+  margin-bottom: 48px;
+}
+
+h1 {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 32pt;
+  font-weight: bold;
+}
+
+.head__logo {
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+  line-height: 18pt;
+}
+
+.card__header {
+  font-weight: bold;
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+
+.card__counter {
+  text-align: right;
+  color: #10C971;
+}
+
+.icon__like {
+  background: url(icons/thumb-up-line.svg) no-repeat;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  fill: #10C971;
+}
