@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import datetime
 import os
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import hashlib
 
@@ -28,15 +28,17 @@ def post_issue():
     post_id = collection.insert_one(content).inserted_id
     return str(post_id)
 
-# @app.route('/issues', methods=['GET'])
-# def get_issues():
-    # cursor = collection.find({})
-    # documents = []
-    # for document in cursor:
-        # documents.append(document)
-    # 
-    # print(documents)
-    # return str(post_id)
+@app.route('/issues', methods=['GET'])
+def get_issues():
+    documents = []
+    for document in collection.find():
+        print(document)
+        documents.append(document)
+    print(documents)
+    print("12312")
+    return render_template("base.html",
+        title = 'Home',
+        documents = documents)
 
 def allowed_file(filename):
     return '.' in filename and \
