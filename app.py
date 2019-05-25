@@ -97,7 +97,7 @@ def main_page_template():
     documents = []
     for document in collection.find():
         documents.append(document)
-        documents.sort(key=lambda i: len(i['users_like']))
+        documents.sort(key=lambda i: len(i['users_like']), reverse=True)
     print(documents)
     return render_template("issues.html",
         title = 'Home',
