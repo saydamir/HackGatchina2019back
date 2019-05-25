@@ -43,6 +43,12 @@
                         {{document.title}}
                       </a>
                     </h6>
+                    <div class="card__geo">
+                      <span class="ymaps-geolink">
+                        {{ document.coordinate|join(',')}}
+                        <!-- сюда адрес -->
+                      </span>
+                    </div>
                   </div>
                   <div class="col-xs-3 card__counter">
                     <h6>
@@ -52,12 +58,7 @@
                     </h6>
                   </div>
                   <div class="col-xs-12">
-                    <div class="card__geo">
-                      <span class="ymaps-geolink">
-                        {{ document.coordinate|join(',')}}
-                        <!-- сюда адрес -->
-                      </span>
-                    </div>
+      
                   </div>
                 </div>
               </header>
