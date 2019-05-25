@@ -46,6 +46,11 @@ h1 {
   margin-bottom: 12px;
 }
 
+.card__header-link {
+  text-decoration: none;
+  color: #000;
+}
+
 .card__counter {
   text-align: right;
   color: #10C971;
@@ -58,11 +63,18 @@ h1 {
 }
 
 .card__geo {
-  flex: content;
-  align-items: center;
+  /* flex: content;
+  align-items: center; */
+  font-size: 12pt;
+  font-weight: 300;
+  color: #613EEA;
 }
 
-.card__geo a, .card__geo a:visited {
+.card_geo .ymaps-geolink {
+  color: #613EEA !important;
+}
+
+/* .card__geo a, .card__geo a:visited {
   color: #613EEA;
   font-size: 12pt;
   font-weight: 300;
@@ -73,7 +85,7 @@ h1 {
 .card__geo a:hover {
   color: #613EEA;
   text-decoration: underline;
-}
+} */
 
 
 

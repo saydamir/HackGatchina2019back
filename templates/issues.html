@@ -4,11 +4,17 @@
 <link rel="stylesheet" href="./static/flexboxgrid.min.css">
 <link rel="stylesheet" href="./static/style.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
+
 <nav class="head">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <div class="head__logo">Gatchina<div>
+        <div class="head__logo">
+          <a class="card__header-link" href="#"> <!-- вместо решетки ссылка на корень сайта -->
+            Gatchina
+          </a>
+        <div>
       </div>
     </div>
   </div>
@@ -25,7 +31,9 @@
               <div class="col-xs-9">
                 <h6>
                   <!-- сюда заголовок -->
-                   {{document.title}}
+                  <a class="card__header-link" href="#"> <!-- вместо решетки ссылка на проблему -->
+                    {{document.title}}
+                  </a>
                 </h6>
               </div>
               <div class="col-xs-3 card__counter">
@@ -38,8 +46,9 @@
               <div class="col-xs-12">
                 <div class="card__geo">
                     <!-- сюда адрес -->
-                    <i class="icon icon__geo"></i>
-                    <a href="">ул. Советов, д. 15</a>
+                    <span class="ymaps-geolink">
+                        ул. Жемчужина, 5, Гатчина, Ленинградская
+                    </span>
                 </div>
               </div>
             </div>
