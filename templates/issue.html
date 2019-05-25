@@ -1,11 +1,21 @@
+<html>
 <!doctype html>
 <head>
   <title>Gatchina</title>
   <link rel="stylesheet" href="/static/reset.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="/static/flexboxgrid.min.css">
   <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
+
+  <style>
+    .mySlides {display:none}
+    .w3-left, .w3-right, .w3-badge {cursor:pointer}
+    .w3-badge {height:13px;width:13px;padding:0}
+  </style>  
+
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
+
 </head>
 <body>
   <nav class="head">
@@ -56,73 +66,25 @@
                 </div>
               </header>
               <div class="page__slider">
-                <div class="my-slider">
-                  <div><img src="https://source.unsplash.com/collection/993239/932x400" alt="" width="932"></div>
-                </div>
+                  <div class="w3-content w3-display-container" style="max-width:800px">
+                      <img class="mySlides" src="https://source.unsplash.com/user/erondu/800x400" style="width:100%">
+                      <img class="mySlides" src="https://source.unsplash.com/user/lecreuset/800x400" style="width:100%">
+                      <img class="mySlides" src="https://source.unsplash.com/user/brynamite/800x400" style="width:100%">
+                      <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+                        <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                        <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+                      </div>
+                    </div>
               </div>
               <div class="page__body">
                 <!-- сюда описание -->
                 {{document.text}}
               </div>
               <div class="page__map">
-                  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="" defer=""></script>
-                  <script>
-                    var map;
-                    function initMap() {
-                        var mapDiv = document.getElementById('map-container');
-                        map = new google.maps.Map(mapDiv, {
-                            zoom: 11,
-                            scrollwheel: false,
-                            center: new google.maps.LatLng(41.6202005,-83.6044291), // Toledo center
-                      styles: [{stylers:[{hue:'#3655A5'},{saturation:250}]},{featureType:'road',elementType:'geometry',stylers:[{lightness:50},{visibility:'simplified'}]},{featureType:'road',elementType:'labels',stylers:[{visibility:'off'}]}]
-                        });
-                        var outlets = [
-                            {lat: 41.67669637889278, lng: -83.68196048465575, name: 'Sylvania', address: '5860 W CENTRAL AVE, TOLEDO OH 43615', workingHours: '11AM – 9PM', phone: '(419)57-87-777'},
-                            {lat: 41.57846782296604, lng: -83.6812830888855, name: 'Maumee', address: '514 THE BOULEVARD, MAUMEE OH 43537', workingHours: '11AM – 9PM', phone: '(419)89-39-999'},
-                            {lat: 41.5372466, lng: -83.63445769999998, name: 'Perrysburg', address: '26520 N DIXIE HWY, PERRYSBURG OH 43551', workingHours: '11AM – 9PM', phone: '(419)87-47-777'}, 
-                            {lat: 41.65377609999999, lng: -83.62144380000001, name: 'Bubble Tea', address: '1440 SECOR ROAD SUITE P, TOLEDO OH 43607', workingHours: '12AM – 10PM'}
-                        ];
-                        var image = 'http://image.ibb.co/bFXp4m/Marker.png';
-                        var infowindow = new google.maps.InfoWindow({
-                          content: ''
-                        });
-                        var template = '<div class="tooltip">' +
-                          '<div class="tooltip_h1">{name}</div>' +
-                          '<div class="tooltip_address">{address}</div>' +
-                          '<div class="tooltip_hours">OPEN EVERY DAY' +
-                            '<br>{workingHours}</div>' +
-                          '<div class="tooltip_phones">{phone}</div>' +
-                        '</div>';
-                        for (var i = 0; i<outlets.length; i++) {
-                          (function (innerMap) {
-                      var layout = template;
-                            var data = ['name', 'address', 'workingHours', 'phone'];
-                            data.forEach(function(item) {
-                              var value = outlets[i][item] !== void 0 ? outlets[i][item] : '';
-                              layout = layout.replace('{' + item + '}', value);
-                            });
-                            var marker = new google.maps.Marker({
-                                position: {
-                                    lat: outlets[i].lat,
-                                    lng:  outlets[i].lng
-                                },
-                                map: innerMap,
-                                icon:  {
-                                    url: image,
-                                    size: new google.maps.Size(56,75),
-                                    scaledSize: new google.maps.Size(56,75),
-                                    anchor: new google.maps.Point(28,75)
-                                },
-                                infoWindowContent: layout
-                            });
-                            google.maps.event.addListener(marker, 'click', function() {
-                               infowindow.setContent(this.infoWindowContent);
-                               infowindow.open(innerMap, this);
-                            });
-                          }(map));         
-                        } 
-                    }
-                </script>
+
               </div>
             </section>
             <!-- конец карточки-->
@@ -130,4 +92,34 @@
         </div>  
       </div>
     </section>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+        
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+        
+        function currentDiv(n) {
+          showDivs(slideIndex = n);
+        }
+        
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-white", "");
+          }
+          x[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " w3-white";
+        }
+        </script>
 </body>
+</html>
