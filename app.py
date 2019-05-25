@@ -110,6 +110,18 @@ def issue_page_template(id):
         document = document)
 
 
+@app.route('/issues/vote/<id>', methods=['POST'])
+def vote_issue(id):
+    collection.update_one(
+    {'_id': ObjectId(id)},
+    {
+        '$addToSet': {
+            'users_like': "asdsadsads"}
+        }
+    )
+
+    return "oke"
+
 @app.route('/static/', defaults={'path': ''})
 @app.route('/static/<path:path>')
 def get_resource(path): 
