@@ -53,7 +53,7 @@
                   <div class="col-xs-12">
                     <div class="card__geo">
                       <span class="ymaps-geolink">
-                        ул. Жемчужина, 5, Гатчина, Ленинградская
+                        {{ document.coordinate|join(',')}}
                         <!-- сюда адрес -->
                       </span>
                     </div>
@@ -68,7 +68,7 @@
                 <!-- сюда автора -->
                 <span class="card__author">{{document.author}}</span>,
                 <!-- сюда дату -->
-                <span class="card__date">25 мая 2019
+                <span class="card__date">{{document.create_date}}
                   <!-- сюда дата --></span>
               </div>
             </div>
