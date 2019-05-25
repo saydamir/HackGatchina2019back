@@ -23,10 +23,6 @@ collection.create_index([("coordinate", GEO2D)])
 @app.route('/issues', methods=['POST'])
 def post_issue():
     content = request.get_json()
-    # post = {"author": "Mike",
-            # "text": "My first blog post!",
-            # "coordinate": "33.44, 55.22",
-            # "date": datetime.datetime.utcnow()}
     content["create_date"] = datetime.datetime.now().strftime("%d/%m/%Y")
     post_id = collection.insert_one(content).inserted_id
     return str(post_id)
@@ -84,18 +80,13 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
-def root_dir():  # pragma: no cover
+def root_dir():
     return os.path.abspath(os.path.dirname(__file__))
 
 
-def get_file(filename):  # pragma: no cover
+def get_file(filename): 
     try:
         src = os.path.join("", filename)
-        # Figure out how flask returns static files
-        # Tried:
-        # - render_template
-        # - send_file
-        # This should not be so non-obvious
         return open(src).read()
     except IOError as exc:
         return str(exc)
@@ -106,7 +97,6 @@ def main_page_template():
     for document in collection.find():
         documents.append(document)
         documents.sort(key=lambda i: len(i['users_like']), reverse=True)
-    print(documents)
     return render_template("issues.html",
         title = 'Home',
         documents = documents)
@@ -121,7 +111,7 @@ def issue_page_template(id):
 
 @app.route('/static/', defaults={'path': ''})
 @app.route('/static/<path:path>')
-def get_resource(path):  # pragma: no cover
+def get_resource(path): 
     mimetypes = {
         ".css": "text/css",
         ".html": "text/html",
