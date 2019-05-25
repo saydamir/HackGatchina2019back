@@ -32,10 +32,7 @@ def post_issue():
 def get_issues():
     documents = []
     for document in collection.find():
-        print(document)
         documents.append(document)
-    print(documents)
-    print("12312")
     return render_template("base.html",
         title = 'Home',
         documents = documents)
