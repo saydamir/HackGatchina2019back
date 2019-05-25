@@ -120,7 +120,7 @@ def vote_issue(id):
         }
     )
 
-    return "oke"
+    return "ok"
 
 @app.route('/static/', defaults={'path': ''})
 @app.route('/static/<path:path>')

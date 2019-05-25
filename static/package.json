@@ -8,7 +8,5 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "tiny-slider": "^2.9.2"
-  }
+  "dependencies": {}
 }

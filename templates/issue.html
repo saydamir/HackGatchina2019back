@@ -6,31 +6,6 @@
   <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
-
-  <!-- tiny slider start -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css">
-  <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.helper.ie8.js"></script><![endif]-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.js"></script>
-  <script type="module">
-    import {tns} from './static/node_modules/tiny-slider/src/tiny-slider.js';
-  
-    var slider = tns({
-      container: '.my-slider',
-      items: 3,
-      slideBy: 'page',
-      autoplay: true
-    });
-  </script>
-  <script>
-    const Http = new XMLHttpRequest();
-    const url='https://jsonplaceholder.typicode.com/posts';
-    Http.open("GET", url);
-    Http.send();
-    Http.onreadystatechange=(e)=>{
-    console.log(Http.responseText)
-    }
-  </script>
-  <!-- tiny slider end -->
 </head>
 <body>
   <nav class="head">
@@ -65,8 +40,8 @@
                   </div>
                   <div class="col-xs-12">
                     <div class="page__geo">
-                      <span class="ymaps-geolink" data-bounds="[{{document.coordinate|join(', ')}}]">
-                          https://geocode-maps.yandex.ru/1.x/?apikey=<b2a258f0-8c3c-4a97-baf8-dad09cc004d0>&geocode={{document.coordinate|join(',')}}
+                      <span class="ymaps-geolink" data-bounds="[55.97082, 33.214969]">
+                          flhtcjjj9898
                       </span>
                     </div>
                   </div>
@@ -88,6 +63,66 @@
               <div class="page__body">
                 <!-- сюда описание -->
                 {{document.text}}
+              </div>
+              <div class="page__map">
+                  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="" defer=""></script>
+                  <script>
+                    var map;
+                    function initMap() {
+                        var mapDiv = document.getElementById('map-container');
+                        map = new google.maps.Map(mapDiv, {
+                            zoom: 11,
+                            scrollwheel: false,
+                            center: new google.maps.LatLng(41.6202005,-83.6044291), // Toledo center
+                      styles: [{stylers:[{hue:'#3655A5'},{saturation:250}]},{featureType:'road',elementType:'geometry',stylers:[{lightness:50},{visibility:'simplified'}]},{featureType:'road',elementType:'labels',stylers:[{visibility:'off'}]}]
+                        });
+                        var outlets = [
+                            {lat: 41.67669637889278, lng: -83.68196048465575, name: 'Sylvania', address: '5860 W CENTRAL AVE, TOLEDO OH 43615', workingHours: '11AM – 9PM', phone: '(419)57-87-777'},
+                            {lat: 41.57846782296604, lng: -83.6812830888855, name: 'Maumee', address: '514 THE BOULEVARD, MAUMEE OH 43537', workingHours: '11AM – 9PM', phone: '(419)89-39-999'},
+                            {lat: 41.5372466, lng: -83.63445769999998, name: 'Perrysburg', address: '26520 N DIXIE HWY, PERRYSBURG OH 43551', workingHours: '11AM – 9PM', phone: '(419)87-47-777'}, 
+                            {lat: 41.65377609999999, lng: -83.62144380000001, name: 'Bubble Tea', address: '1440 SECOR ROAD SUITE P, TOLEDO OH 43607', workingHours: '12AM – 10PM'}
+                        ];
+                        var image = 'http://image.ibb.co/bFXp4m/Marker.png';
+                        var infowindow = new google.maps.InfoWindow({
+                          content: ''
+                        });
+                        var template = '<div class="tooltip">' +
+                          '<div class="tooltip_h1">{name}</div>' +
+                          '<div class="tooltip_address">{address}</div>' +
+                          '<div class="tooltip_hours">OPEN EVERY DAY' +
+                            '<br>{workingHours}</div>' +
+                          '<div class="tooltip_phones">{phone}</div>' +
+                        '</div>';
+                        for (var i = 0; i<outlets.length; i++) {
+                          (function (innerMap) {
+                      var layout = template;
+                            var data = ['name', 'address', 'workingHours', 'phone'];
+                            data.forEach(function(item) {
+                              var value = outlets[i][item] !== void 0 ? outlets[i][item] : '';
+                              layout = layout.replace('{' + item + '}', value);
+                            });
+                            var marker = new google.maps.Marker({
+                                position: {
+                                    lat: outlets[i].lat,
+                                    lng:  outlets[i].lng
+                                },
+                                map: innerMap,
+                                icon:  {
+                                    url: image,
+                                    size: new google.maps.Size(56,75),
+                                    scaledSize: new google.maps.Size(56,75),
+                                    anchor: new google.maps.Point(28,75)
+                                },
+                                infoWindowContent: layout
+                            });
+                            google.maps.event.addListener(marker, 'click', function() {
+                               infowindow.setContent(this.infoWindowContent);
+                               infowindow.open(innerMap, this);
+                            });
+                          }(map));         
+                        } 
+                    }
+                </script>
               </div>
             </section>
             <!-- конец карточки-->
