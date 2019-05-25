@@ -51,11 +51,14 @@ def get_issues_near(coordiante):
 
 @app.route('/issues/vote/<id>', methods=['POST'])
 def vote_issue(id):
+    content = request.get_json()
+    if 'authorId' not in content.keys():
+        return 'bad request', 400
     collection.update_one(
     {'_id': ObjectId(id)},
     {
         '$addToSet': {
-            'users_like': "asdsadsads"}
+            'users_like': content['authorId']}
         }
     )
     return "ok"
