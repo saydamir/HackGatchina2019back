@@ -2,7 +2,7 @@ from pymongo import MongoClient, GEO2D
 from bson.json_util import dumps,ObjectId
 import datetime
 import os
-from flask import Flask, request, redirect, url_for, render_template, Response
+from flask import Flask, request, redirect, url_for, render_template, Response, send_from_directory
 from werkzeug.utils import secure_filename
 import hashlib
 import json
@@ -20,6 +20,9 @@ db = client['gatchina']
 collection = db['problems']
 collection.create_index([("coordinate", GEO2D)])
 
+
+###############################
+##############API##############
 @app.route('/issues', methods=['POST'])
 def post_issue():
     content = request.get_json()
@@ -44,6 +47,45 @@ def get_issues_near(coordiante):
         documents.append(document)
     return dumps(documents)
 
+@app.route('/issues/vote/<id>', methods=['POST'])
+def vote_issue(id):
+    collection.update_one(
+    {'_id': ObjectId(id)},
+    {
+        '$addToSet': {
+            'users_like': "asdsadsads"}
+        }
+    )
+    return "ok"
+##############API##############
+###############################
+
+
+##################################
+#########WEB UI###################
+@app.route('/', methods=['GET'])
+def main_page_template():
+    documents = []
+    for document in collection.find():
+        documents.append(document)
+        documents.sort(key=lambda i: len(i['users_like']), reverse=True)
+    return render_template("issues.html",
+        title = 'Home',
+        documents = documents)
+
+@app.route('/webissue/<id>', methods=['GET'])
+def issue_page_template(id):
+    document = collection.find_one({"_id" : ObjectId(id)})
+    return render_template("issue.html",
+        title = 'Issue',
+        document = document)
+#########WEB UI###################
+##################################
+
+
+
+#################################
+##########IMAGES#################
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -74,8 +116,6 @@ def upload_file():
     </form>
     '''
 
-from flask import send_from_directory
-
 @app.route('/images/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
@@ -84,44 +124,18 @@ def uploaded_file(filename):
 def root_dir():
     return os.path.abspath(os.path.dirname(__file__))
 
-
 def get_file(filename): 
     try:
         src = os.path.join("", filename)
         return open(src).read()
     except IOError as exc:
         return str(exc)
-
-@app.route('/', methods=['GET'])
-def main_page_template():
-    documents = []
-    for document in collection.find():
-        documents.append(document)
-        documents.sort(key=lambda i: len(i['users_like']), reverse=True)
-    return render_template("issues.html",
-        title = 'Home',
-        documents = documents)
-
-@app.route('/webissue/<id>', methods=['GET'])
-def issue_page_template(id):
-    document = collection.find_one({"_id" : ObjectId(id)})
-    return render_template("issue.html",
-        title = 'Issue',
-        document = document)
+###########IMAGES##################
+##################################
 
 
-@app.route('/issues/vote/<id>', methods=['POST'])
-def vote_issue(id):
-    collection.update_one(
-    {'_id': ObjectId(id)},
-    {
-        '$addToSet': {
-            'users_like': "asdsadsads"}
-        }
-    )
-
-    return "ok"
-
+##################################
+#############SERVER STATIC DIR####
 @app.route('/static/', defaults={'path': ''})
 @app.route('/static/<path:path>')
 def get_resource(path): 
@@ -135,3 +149,5 @@ def get_resource(path):
     mimetype = mimetypes.get(ext, "text/html")
     content = get_file(complete_path)
     return Response(content, mimetype=mimetype)
+#############SERVER STATIC DIR####
+##################################
