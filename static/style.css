@@ -157,3 +157,9 @@ h1 {
 .page__slider {
   margin-bottom: 24px;
 }
+
+.page__counter {
+  text-align: right;
+  color: #10C971;
+  font-size: 24pt;
+}
