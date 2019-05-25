@@ -21,6 +21,15 @@
       autoplay: true
     });
   </script>
+  <script>
+    const Http = new XMLHttpRequest();
+    const url='https://jsonplaceholder.typicode.com/posts';
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange=(e)=>{
+    console.log(Http.responseText)
+    }
+  </script>
   <!-- tiny slider end -->
 </head>
 <body>
@@ -56,9 +65,9 @@
                   </div>
                   <div class="col-xs-12">
                     <div class="page__geo">
-                      <span class="ymaps-geolink">
-                          {{ document.coordinate|join(',')}}
-                        </span>
+                      <span class="ymaps-geolink" data-bounds="[{{document.coordinate|join(', ')}}]">
+                          https://geocode-maps.yandex.ru/1.x/?apikey=<b2a258f0-8c3c-4a97-baf8-dad09cc004d0>&geocode={{document.coordinate|join(',')}}
+                      </span>
                     </div>
                   </div>
                   <div class="col-xs-12">
