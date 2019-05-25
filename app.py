@@ -113,10 +113,10 @@ def main_page_template():
 
 @app.route('/webissue/<id>', methods=['GET'])
 def issue_page_template(id):
-    issue = collection.find_one({"_id" : id})
+    document = collection.find_one({"_id" : id})
     return render_template("issue.html",
         title = 'Issue',
-        issue = issue)
+        document = document)
 
 
 @app.route('/static/', defaults={'path': ''})

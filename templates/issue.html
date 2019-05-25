@@ -44,14 +44,14 @@
                   <div class="col-xs-9">
                     <h1>
                       <!-- сюда заголовок -->
-                      {{issue.title}}
+                      {{document.title}}
                     </h1>
                   </div>
                   <div class="col-xs-3 page__counter">
                     <h6>
                       <i class="icon icon__like"></i>
                       <!--  сюда количество голосов -->
-                      {{issue.users_like|length}}
+                      {{document.users_like|length}}
                       </h6>
                   </div>
                   <div class="col-xs-12">
@@ -78,7 +78,7 @@
               </div>
               <div class="page__body">
                 <!-- сюда описание -->
-                {{issue.text}}
+                {{document.text}}
               </div>
             </section>
             <!-- конец карточки-->
