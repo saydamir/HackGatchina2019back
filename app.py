@@ -1,9 +1,12 @@
 from pymongo import MongoClient
+from bson.json_util import dumps
 import datetime
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template, Response
 from werkzeug.utils import secure_filename
 import hashlib
+import json
+
 
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -32,13 +35,8 @@ def post_issue():
 def get_issues():
     documents = []
     for document in collection.find():
-        print(document)
         documents.append(document)
-    print(documents)
-    print("12312")
-    return render_template("base.html",
-        title = 'Home',
-        documents = documents)
+    return dumps(documents)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -94,15 +92,25 @@ def get_file(filename):  # pragma: no cover
     except IOError as exc:
         return str(exc)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/', methods=['GET'])
+def main_page_template():
+    documents = []
+    for document in collection.find():
+        documents.append(document)
+    print(documents)
+    return render_template("index.html",
+        title = 'Home',
+        documents = documents)
+
+@app.route('/static/', defaults={'path': ''})
+@app.route('/static/<path:path>')
 def get_resource(path):  # pragma: no cover
     mimetypes = {
         ".css": "text/css",
         ".html": "text/html",
         ".js": "application/javascript",
     }
-    complete_path = os.path.join("./templates", path)
+    complete_path = os.path.join("./static", path)
     ext = os.path.splitext(path)[1]
     mimetype = mimetypes.get(ext, "text/html")
     content = get_file(complete_path)
