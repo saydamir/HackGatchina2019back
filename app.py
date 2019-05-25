@@ -103,6 +103,14 @@ def main_page_template():
         title = 'Home',
         documents = documents)
 
+@app.route('/webissue/<id>', methods=['GET'])
+def issue_page_template(id):
+    issue = collection.find_one({"_id" : id})
+    return render_template("issue.html",
+        title = 'Issue',
+        issue = issue)
+
+
 @app.route('/static/', defaults={'path': ''})
 @app.route('/static/<path:path>')
 def get_resource(path):  # pragma: no cover
