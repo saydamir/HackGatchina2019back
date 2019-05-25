@@ -1,5 +1,5 @@
 from pymongo import MongoClient, GEO2D
-from bson.json_util import dumps
+from bson.json_util import dumps,ObjectId
 import datetime
 import os
 from flask import Flask, request, redirect, url_for, render_template, Response
@@ -113,7 +113,7 @@ def main_page_template():
 
 @app.route('/webissue/<id>', methods=['GET'])
 def issue_page_template(id):
-    document = collection.find_one({"_id" : id})
+    document = collection.find_one({"_id" : ObjectId(id)})
     return render_template("issue.html",
         title = 'Issue',
         document = document)
