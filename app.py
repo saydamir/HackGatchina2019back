@@ -71,7 +71,7 @@ def upload_file():
 
 from flask import send_from_directory
 
-@app.route('/image/<filename>')
+@app.route('/images/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
