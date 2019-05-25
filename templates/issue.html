@@ -1,0 +1,93 @@
+<!doctype html>
+<head>
+  <title>Gatchina</title>
+  <link rel="stylesheet" href="./static/reset.css">
+  <link rel="stylesheet" href="./static/flexboxgrid.min.css">
+  <link rel="stylesheet" href="./static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
+
+  <!-- tiny slider start -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css">
+  <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.js"></script>
+  <script type="module">
+    import {tns} from './static/node_modules/tiny-slider/src/tiny-slider.js';
+  
+    var slider = tns({
+      container: '.my-slider',
+      items: 3,
+      slideBy: 'page',
+      autoplay: true
+    });
+  </script>
+  <!-- tiny slider end -->
+</head>
+<body>
+  <nav class="head">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="head__logo">Gatchina</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- начало карточки -->
+            <section class="page">
+              <header class="page__header">
+                <div class="row">
+                  <div class="col-xs-9">
+                    <h1>
+                      <!-- сюда заголовок -->
+                      Тротуар после ремонта труб
+                    </h1>
+                  </div>
+                  <div class="col-xs-3 page__counter">
+                    <h6>
+                      <i class="icon icon__like"></i>
+                      3000 <!--  сюда количество голосов -->
+                      </h6>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="page__geo">
+                      <span class="ymaps-geolink">
+                          ул. Жемчужина, 5, Гатчина, Ленинградская
+                        </span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="page__bottom">
+                      <span class="page__author">Ольга Тихомирова</span>,
+                      <span class="page__date">25 мая 2019</span>
+                    </div>
+                  </div>
+                </div>
+              </header>
+              <div class="page__slider">
+                <div class="my-slider">
+                  <div><img src="https://source.unsplash.com/collection/993239/932x400" alt="" width="932"></div>
+                </div>
+              </div>
+              <div class="page__body">
+                <!-- сюда описание -->
+                  Здравствуйте! После ремонта трубы холодного водоснабжения в январе 2019г. тротуар не 
+                  был приведён в надлежащий вид. Ходить по пешеходной дорожке небезопасно. 
+    
+                  Просим Вас организовать восстановление пешеходной дорожки вдоль дома 7 
+                  по улице Крупской (нечетная сторона улицы Константинова).
+    
+                  Так же просим Вас уточнить, планируется ли мощение пешеходных дорожек вдоль 
+                  нечетной стороны улицы Константинова?
+              </div>
+            </section>
+            <!-- конец карточки-->
+          </div>
+        </div>  
+      </div>
+    </section>
+</body>
