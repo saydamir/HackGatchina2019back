@@ -74,6 +74,12 @@ h1 {
   color: #613EEA !important;
 }
 
+.card__thumbnail img {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 6px;
+}
+
 /* .card__geo a, .card__geo a:visited {
   color: #613EEA;
   font-size: 12pt;

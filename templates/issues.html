@@ -1,8 +1,8 @@
 <!doctype html>
 <title>Gatchina</title>
-<link rel="stylesheet" href="./static/reset.css">
-<link rel="stylesheet" href="./static/flexboxgrid.min.css">
-<link rel="stylesheet" href="./static/style.css">
+<link rel="stylesheet" href="/static/reset.css">
+<link rel="stylesheet" href="/static/flexboxgrid.min.css">
+<link rel="stylesheet" href="/static/style.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
 
@@ -11,13 +11,14 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="head__logo">
-          <a class="card__header-link" href="#"> <!-- вместо решетки ссылка на корень сайта -->
+          <a class="card__header-link" href="#">
+            <!-- вместо решетки ссылка на корень сайта -->
             Gatchina
           </a>
-        <div>
+          <div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 </nav>
 <section class="content">
   <div class="container">
@@ -26,48 +27,56 @@
         {% for document in documents %}
         <!-- начало карточки -->
         <section class="card">
-          <header class="card__header">
-            <div class="row">
-              <div class="col-xs-9">
-                <h6>
-                  <!-- сюда заголовок -->
-                  <a class="card__header-link" href="#"> <!-- вместо решетки ссылка на проблему -->
-                    {{document.title}}
-                  </a>
-                </h6>
-              </div>
-              <div class="col-xs-3 card__counter">
-                <h6>
-                  <i class="icon icon__like"></i>
-                   <!--  сюда количество голосов -->
-                    {{document.users_like|length}}
-                  </h6>
-              </div>
-              <div class="col-xs-12">
-                <div class="card__geo">
-                    <!-- сюда адрес -->
-                    <span class="ymaps-geolink">
+          <div class="row">
+            <div class="card__thumbnail col-xs-3">
+              <img src="https://source.unsplash.com/collection/993239/932x400" alt="">
+            </div>
+            <div class="card__content col-xs-9">
+              <header class="card__header">
+                <div class="row">
+                  <div class="col-xs-9">
+                    <h6>
+                      <!-- сюда заголовок -->
+                      <a class="card__header-link" href="#">
+                        <!-- вместо решетки ссылка на проблему -->
+                        {{document.title}}
+                      </a>
+                    </h6>
+                  </div>
+                  <div class="col-xs-3 card__counter">
+                    <h6>
+                      <i class="icon icon__like"></i>
+                      <!--  сюда количество голосов -->
+                      {{document.users_like|length}}
+                    </h6>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="card__geo">
+                      <span class="ymaps-geolink">
                         ул. Жемчужина, 5, Гатчина, Ленинградская
-                    </span>
+                        <!-- сюда адрес -->
+                      </span>
+                    </div>
+                  </div>
                 </div>
+              </header>
+              <div class="card__body">
+                <!-- сюда описание -->
+                {{document.text}}
+              </div>
+              <div class="card__bottom">
+                <!-- сюда автора -->
+                <span class="card__author">{{document.author}}</span>,
+                <!-- сюда дату -->
+                <span class="card__date">25 мая 2019
+                  <!-- сюда дата --></span>
               </div>
             </div>
-          </header>
-          <div class="card__body">
-            <!-- сюда описание -->
-            {{document.text}}
-
-          </div>
-          <div class="card__bottom">
-            <!-- сюда автора -->
-            <span class="card__author">{{document.author}}</span>,
-            <!-- сюда дату -->
-            <span class="card__date">25 мая 2019</span>
           </div>
         </section>
         {% endfor %}
         <!-- конец карточки-->
       </div>
-    </div>  
+    </div>
   </div>
 </section>
