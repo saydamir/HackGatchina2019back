@@ -1,14 +1,13 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, GEO2D
 from bson.json_util import dumps
 import datetime
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template, Response
+from flask import Flask, request, redirect, url_for, render_template, Response
 from werkzeug.utils import secure_filename
 import hashlib
 import json
 
-
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 
@@ -19,6 +18,7 @@ client = MongoClient('localhost', 27017)
 
 db = client['gatchina']
 collection = db['problems']
+collection.create_index([("coordinate", GEO2D)])
 
 @app.route('/issues', methods=['POST'])
 def post_issue():
@@ -27,7 +27,7 @@ def post_issue():
             # "text": "My first blog post!",
             # "coordinate": "33.44, 55.22",
             # "date": datetime.datetime.utcnow()}
-    
+    content["create_date"] = datetime.datetime.now().strftime("%d/%m/%Y")
     post_id = collection.insert_one(content).inserted_id
     return str(post_id)
 
@@ -35,6 +35,15 @@ def post_issue():
 def get_issues():
     documents = []
     for document in collection.find():
+        documents.append(document)
+    return dumps(documents)
+
+@app.route('/issues/coordinate/<coordiante>', methods=['GET'])
+def get_issues_near(coordiante):
+    coordinate_list = coordiante.split(",")
+    x, y = float(coordinate_list[0]), float(coordinate_list[1])
+    documents = []
+    for document in collection.find({"coordinate": {"$near": [x, y]}}).limit(20):
         documents.append(document)
     return dumps(documents)
 
@@ -47,16 +56,15 @@ def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
             return redirect(request.url)
         file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = hashlib.md5(file.read()).hexdigest() + "." + secure_filename(file.filename).rsplit('.', 1)[1].lower()
+            filename =  hashlib.md5(file.read()).hexdigest() + "." + secure_filename(file.filename).rsplit('.', 1)[1].lower()
+            file.seek(0)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return filename
     return '''
