@@ -51,6 +51,25 @@ h1 {
   margin-bottom: 6px;
 }
 
+.nav__container {
+  margin-top: 6px;
+  text-align: right;
+}
+
+.nav_back a.btn__green {
+  background-color: #10C971 !important;
+  font-size: 12pt;
+  border-radius: 6px;
+  padding: 3px 9px;
+}
+
+.nav_back a.btn__red {
+  background-color: #FA2E69 !important;
+  font-size: 12pt;
+  border-radius: 6px;
+  padding: 3px 9px;
+}
+
 .nav_back a {
   font-size: 10pt;
   background: #613EEA;
