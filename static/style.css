@@ -43,8 +43,18 @@ h1 {
   text-decoration: none;
 }
 
-.nav_back {
+.nav_back__container {
+  margin-bottom: 6px;
+}
+
+.nav_back a {
   font-size: 10pt;
+  background: #613EEA;
+  border-radius: 6px;
+  padding: 3px 9px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .card {
