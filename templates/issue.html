@@ -46,7 +46,16 @@ ymaps.ready(init);
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
-            <div class="head__logo"><a href="/">Gatchina</a></div>
+            <div class="head__logo">
+              <img src="/static/icons/logo_gerb.svg" class="head__logo__img" height="30" alt="">
+              <a href="/">
+                <!-- вместо решетки ссылка на корень сайта -->
+                Gatchina
+              </a>
+              
+              <div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -59,8 +68,10 @@ ymaps.ready(init);
             <section class="page">
               <header class="page__header">
                 <div class="row">
+                  <div class="col-xs-12 nav_back__container">
+                    <span class="nav_back"><a href="/">Назад к списку</a></span>
+                  </div>
                   <div class="col-xs-9">
-                    <span class="nav_back">← <a href="/">Назад к списку</a></span>
                     <h1>
                       <!-- сюда заголовок -->
                       {{document.title}}
@@ -68,7 +79,7 @@ ymaps.ready(init);
                   </div>
                   <div class="col-xs-3 page__counter">
                     <h1>
-                      <img src="static/icons/thumb-up-line.svg" alt="" class="icon" width=30 height=30>
+                      <img src="/static/icons/thumb-up-line.svg" alt="" class="icon" width=30 height=30>
                       <!--  сюда количество голосов -->
                       {{document.users_like|length}}
                     </h1>

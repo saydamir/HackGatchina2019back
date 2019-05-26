@@ -5,17 +5,18 @@
 <link rel="stylesheet" href="/static/flexboxgrid.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,900&display=swap" rel="stylesheet">
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
 
 <nav class="head">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <div class="head__logo">
+          <img src="/static/icons/logo_gerb.svg" class="head__logo__img" height="30" alt="">
           <a href="/">
             <!-- вместо решетки ссылка на корень сайта -->
             Gatchina
           </a>
+          
           <div>
           </div>
         </div>
@@ -46,10 +47,7 @@
                       </a>
                     </h6>
                     <div class="card__geo">
-                      <span class="ymaps-geolink">
                         {{ document.address }}
-                        <!-- сюда адрес -->
-                      </span>
                     </div>
                   </div>
                   <div class="col-xs-3 card__counter">
