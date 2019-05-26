@@ -40,6 +40,12 @@ def get_issues():
         documents.append(document)
     return dumps(documents)
 
+
+@app.route('/issues/<id>', methods=['GET'])
+def get_one_issues(id):
+    document = collection.find_one({'_id': ObjectId(id)})
+    return dumps(document)
+
 @app.route('/issues/coordinate/<coordiante>', methods=['GET'])
 def get_issues_near(coordiante):
     coordinate_list = coordiante.split(",")
