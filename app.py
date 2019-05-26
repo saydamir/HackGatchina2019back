@@ -76,8 +76,9 @@ def vote_issue(id):
 #########WEB UI###################
 @app.route('/', methods=['GET'])
 def main_page_template():
+    is_positive = "is_positive" in request.args.keys()
     documents = []
-    for document in collection.find():
+    for document in collection.find({"is_positive": is_positive}):
         documents.append(document)
         documents.sort(key=lambda i: len(i['users_like']), reverse=True)
     return render_template("issues.html",
